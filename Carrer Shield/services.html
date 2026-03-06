@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Services - Career Shield</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">Career Shield</div>
+                <div class="mobile-menu-btn">
+                    <button class="icon-btn" id="menu-btn">☰</button>
+                </div>
+                <div class="nav-links" id="nav-links">
+                    <a href="index.html">Home</a>
+                    <a href="about.html">About Us</a>
+                    <a href="services.html" class="active">Services</a>
+                    <a href="contact.html">Contact</a>
+                    <a href="user-dashboard.html">Dashboard</a>
+                    <a href="login.html" class="btn">Login</a>
+                </div>
+                <div class="controls">
+                    <button class="icon-btn" id="rtl-toggle" title="Toggle RTL">RTL</button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container" style="padding: 4rem 0;">
+        <h1 style="text-align: center; margin-bottom: 3rem; color: var(--primary-color);">Our Services</h1>
+        <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));">
+            <div class="card">
+                <div style="font-size: 2rem; margin-bottom: 1rem;">🔍</div>
+                <h3>Job Link Scanner</h3>
+                <p>Paste a job link and our AI will analyze the domain, content, and registry info to give you a trust
+                    score.</p>
+                <div class="form-group" style="margin-top: 1rem;">
+                    <input type="text" id="job-link-input" placeholder="Paste Job URL here...">
+                    <button class="btn" onclick="simulateScan('job-link-result')"
+                        style="width: 100%; margin-top: 5px;">Scan Link</button>
+                    <div id="job-link-result" style="margin-top: 10px; font-weight: bold;"></div>
+                </div>
+            </div>
+            <div class="card">
+                <div style="font-size: 2rem; margin-bottom: 1rem;">📝</div>
+                <h3>Job Description Analyzer</h3>
+                <p>Paste the full job description to check for vague requirements, poor grammar, and other scam
+                    indicators.</p>
+                <div class="form-group" style="margin-top: 1rem;">
+                    <textarea id="jd-input" rows="5" placeholder="Paste job description here..."></textarea>
+                    <button class="btn" onclick="simulateScan('jd-result')"
+                        style="width: 100%; margin-top: 5px;">Analyze Text</button>
+                    <div id="jd-result" style="margin-top: 10px; font-weight: bold;"></div>
+                </div>
+            </div>
+            <div class="card">
+                <div style="font-size: 2rem; margin-bottom: 1rem;">📧</div>
+                <h3>Email Verification</h3>
+                <p>Received a suspicious email? Forward the header or content to check if it's from a legitimate
+                    recruiter domains.</p>
+                <div class="form-group" style="margin-top: 1rem;">
+                    <textarea id="email-input" rows="3" placeholder="Paste email content..."></textarea>
+                    <button class="btn" onclick="simulateScan('email-result')"
+                        style="width: 100%; margin-top: 5px;">Verify Email</button>
+                    <div id="email-result" style="margin-top: 10px; font-weight: bold;"></div>
+                </div>
+            </div>
+            <div class="card">
+                <div style="font-size: 2rem; margin-bottom: 1rem;">🏢</div>
+                <h3>Company Validator</h3>
+                <p>Check if a company is registered and active. We cross-reference with government databases.</p>
+                <div class="form-group" style="margin-top: 1rem;">
+                    <input type="text" id="company-input" placeholder="Company Name...">
+                    <button class="btn" onclick="simulateScan('company-result')"
+                        style="width: 100%; margin-top: 5px;">Check Company</button>
+                    <div id="company-result" style="margin-top: 10px; font-weight: bold;"></div>
+                </div>
+            </div>
+            <div class="card">
+                <div style="font-size: 2rem; margin-bottom: 1rem;">📜</div>
+                <h3>Offer Letter Analysis</h3>
+                <p>Upload your offer letter to detect common templates used by scammers.</p>
+                <div class="form-group" style="margin-top: 1rem;">
+                    <input type="file" id="offer-upload">
+                    <button class="btn" onclick="simulateScan('offer-result')"
+                        style="width: 100%; margin-top: 5px;">Analyze File</button>
+                    <div id="offer-result" style="margin-top: 10px; font-weight: bold;"></div>
+                </div>
+            </div>
+            <div class="card">
+                <div style="font-size: 2rem; margin-bottom: 1rem;">🛡️</div>
+                <h3>Identity Protection</h3>
+                <p>Learn how to secure your personal information during the job search process.</p>
+                <ul style="margin-top: 1rem; list-style-type: disc; padding-left: 1.5rem; color: var(--text-muted);">
+                    <li>Data exposure check</li>
+                    <li>Privacy best practices</li>
+                    <li>SSN protection guides</li>
+                </ul>
+            </div>
+            <div class="card">
+                <div style="font-size: 2rem; margin-bottom: 1rem;">🎓</div>
+                <h3>Education & Training</h3>
+                <p>Access our library of resources to stay updated on the latest scam trends.</p>
+                <ul style="margin-top: 1rem; list-style-type: disc; padding-left: 1.5rem; color: var(--text-muted);">
+                    <li>Webinars and workshops</li>
+                    <li>Interactive quizzes</li>
+                    <li>Scam trend reports</li>
+                </ul>
+            </div>
+        </div>
+        <section class="container"
+            style="margin-top: 4rem; text-align: center; background: var(--surface-color); padding: 3rem; border-radius: 12px; box-shadow: var(--shadow-md);">
+            <h2 style="margin-bottom: 1.5rem; color: var(--primary-color);">Comprehensive Security Scan</h2>
+            <p style="margin-bottom: 2rem;">Fill in any of the fields above and click the button below to get an
+                aggregated safety score for the job opportunity.</p>
+            <button class="btn" onclick="calculateOverallScore()"
+                style="font-size: 1.2rem; padding: 1rem 3rem;">Calculate Overall Score</button>
+            <div id="overall-result" style="margin-top: 2rem; font-size: 1.5rem; font-weight: bold;"></div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Career Shield. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="main.js"></script>
+    <script src="rtltoggle.js"></script>
+</body>
+
+</html>

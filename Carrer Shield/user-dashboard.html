@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard - Career Shield</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .dashboard-container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            width: 250px;
+            background-color: var(--surface-color);
+            padding: 2rem;
+            border-right: 1px solid var(--border-color);
+        }
+
+        .sidebar nav {
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+            gap: 0;
+            /* Remove gap from global nav if any, though global nav uses justify-between */
+        }
+
+        .main-content {
+            flex: 1;
+            padding: 2rem;
+        }
+
+        .sidebar-link {
+            display: block;
+            padding: 10px;
+            color: var(--text-color);
+            margin-bottom: 5px;
+            border-radius: 5px;
+        }
+
+        .sidebar-link:hover,
+        .sidebar-link.active {
+            background-color: var(--background-color);
+            color: var(--primary-color);
+        }
+
+        @media (max-width: 768px) {
+            .dashboard-container {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                border-right: none;
+                border-bottom: 1px solid var(--border-color);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <div class="logo" style="margin-bottom: 2rem;">Career Shield</div>
+            <nav>
+                <a href="#" class="sidebar-link active">Dashboard</a>
+                <a href="#" class="sidebar-link">My Scans</a>
+                <a href="#" class="sidebar-link">Report Scam</a>
+                <a href="#" class="sidebar-link">Settings</a>
+                <a href="login.html" class="sidebar-link"
+                    style="margin-top: 2rem; color: var(--accent-color);">Logout</a>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <header
+                style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; background: none; box-shadow: none; padding: 0;">
+                <h2 id="welcome-msg">Welcome, User</h2>
+                <div class="controls">
+                    <button class="icon-btn" id="rtl-toggle" title="Toggle RTL">RTL</button>
+                </div>
+            </header>
+
+            <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));">
+                <div class="card">
+                    <h3>Secure Scans</h3>
+                    <p id="stat-safe" style="font-size: 2rem; font-weight: bold; color: var(--secondary-color);">–</p>
+                    <p style="font-size: 0.8rem;">Scans passed as safe.</p>
+                </div>
+                <div class="card">
+                    <h3>Risk Scans</h3>
+                    <p id="stat-risk" style="font-size: 2rem; font-weight: bold; color: var(--accent-color);">–</p>
+                    <p style="font-size: 0.8rem;">Scans flagged with risks.</p>
+                </div>
+                <div class="card">
+                    <h3>Total Scans</h3>
+                    <p id="stat-total" style="font-size: 2rem; font-weight: bold; color: var(--primary-color);">–</p>
+                    <p style="font-size: 0.8rem;">Total items scanned.</p>
+                </div>
+            </div>
+
+            <div class="card" style="margin-top: 2rem;">
+                <h3>Recent Activity</h3>
+                <div style="overflow-x: auto;">
+                    <table style="width: 100%; border-collapse: collapse; margin-top: 1rem;">
+                        <thead>
+                            <tr style="text-align: left; border-bottom: 2px solid var(--border-color);">
+                                <th style="padding: 1rem;">Date</th>
+                                <th style="padding: 1rem;">Type</th>
+                                <th style="padding: 1rem;">Description</th>
+                                <th style="padding: 1rem;">Risk Score</th>
+                                <th style="padding: 1rem;">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="scans-tbody">
+                            <tr style="border-bottom: 1px solid var(--border-color);">
+                                <td style="padding: 1rem;">Oct 24, 2023</td>
+                                <td style="padding: 1rem;">Job Link</td>
+                                <td style="padding: 1rem;">remote-data-entry.com</td>
+                                <td style="padding: 1rem;"><span
+                                        style="color: var(--accent-color); font-weight: bold;">85/100</span></td>
+                                <td style="padding: 1rem;">High Risk</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid var(--border-color);">
+                                <td style="padding: 1rem;">Oct 23, 2023</td>
+                                <td style="padding: 1rem;">Email</td>
+                                <td style="padding: 1rem;">recruiter@gmail.com</td>
+                                <td style="padding: 1rem;"><span style="color: orange; font-weight: bold;">45/100</span>
+                                </td>
+                                <td style="padding: 1rem;">Medium Risk</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid var(--border-color);">
+                                <td style="padding: 1rem;">Oct 22, 2023</td>
+                                <td style="padding: 1rem;">Company</td>
+                                <td style="padding: 1rem;">Tech Solutions Inc.</td>
+                                <td style="padding: 1rem;"><span
+                                        style="color: var(--secondary-color); font-weight: bold;">10/100</span></td>
+                                <td style="padding: 1rem;">Safe</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div style="text-align: center; margin-top: 1.5rem;">
+                    <a href="#" class="btn-outline">See All History</a>
+                </div>
+            </div>
+
+            <div class="card" style="margin-top: 2rem;">
+                <h3>Quick Scan</h3>
+                <div id="quick-scan-result"></div>
+                <form onsubmit="quickScan(event)" style="margin-top: 1rem;">
+                    <div class="form-group">
+                        <label>Paste Job Link or Describe the Job</label>
+                        <input type="text" id="quick-scan-input" placeholder="https://... or paste job description"
+                            required>
+                    </div>
+                    <button type="submit" class="btn" id="quick-scan-btn">Scan Now</button>
+                </form>
+            </div>
+        </main>
+    </div>
+
+    <script src="main.js"></script>
+    <script src="rtltoggle.js"></script>
+    <script>
+        const token = localStorage.getItem('token');
+        const user = JSON.parse(localStorage.getItem('user') || 'null');
+
+        // Redirect if not logged in
+        if (!token) window.location.href = 'login.html';
+
+        // Show user name
+        if (user) document.getElementById('welcome-msg').textContent = 'Welcome, ' + user.name + '!';
+
+        // Load stats
+        async function loadStats() {
+            try {
+                const res = await fetch('/api/scans/stats', { headers: { Authorization: 'Bearer ' + token } });
+                const data = await res.json();
+                document.getElementById('stat-safe').textContent = data.safe ?? '–';
+                document.getElementById('stat-risk').textContent = data.risk ?? '–';
+                document.getElementById('stat-total').textContent = data.total ?? '–';
+            } catch (e) { console.error('Stats error', e); }
+        }
+
+        // Load recent scans into table
+        async function loadScans() {
+            try {
+                const res = await fetch('/api/scans', { headers: { Authorization: 'Bearer ' + token } });
+                const scans = await res.json();
+                const tbody = document.getElementById('scans-tbody');
+                tbody.innerHTML = '';
+                if (scans.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="5" style="padding:1rem;text-align:center;">No scans yet.</td></tr>';
+                    return;
+                }
+                scans.slice(0, 5).forEach(s => {
+                    const d = new Date(s.createdAt).toLocaleDateString();
+                    const color = s.status === 'Safe' ? 'var(--secondary-color)' : s.status === 'Medium Risk' ? 'orange' : 'var(--accent-color)';
+                    tbody.innerHTML += `<tr style="border-bottom:1px solid var(--border-color)">
+                        <td style="padding:.75rem">${d}</td>
+                        <td style="padding:.75rem">${s.type}</td>
+                        <td style="padding:.75rem;max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${s.input}</td>
+                        <td style="padding:.75rem"><span style="color:${color};font-weight:bold">${s.riskScore}/100</span></td>
+                        <td style="padding:.75rem">${s.status}</td>
+                    </tr>`;
+                });
+            } catch (e) { console.error('Scans error', e); }
+        }
+
+        // Quick scan
+        async function quickScan(e) {
+            e.preventDefault();
+            const btn = document.getElementById('quick-scan-btn');
+            const input = document.getElementById('quick-scan-input').value;
+            const resultDiv = document.getElementById('quick-scan-result');
+            btn.textContent = 'Scanning...';
+            btn.disabled = true;
+            resultDiv.innerHTML = '<span style="color:var(--primary-color)">Analyzing... ⏳</span>';
+
+            setTimeout(async () => {
+                const score = Math.floor(Math.random() * 100) + 1;
+                const status = score >= 70 ? 'High Risk' : score >= 40 ? 'Medium Risk' : 'Safe';
+                const color = status === 'Safe' ? 'var(--secondary-color)' : status === 'Medium Risk' ? 'orange' : 'var(--accent-color)';
+                resultDiv.innerHTML = `Risk Score: <strong style="color:${color}">${score}/100</strong> (${status})`;
+
+                try {
+                    await fetch('/api/scans', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + token },
+                        body: JSON.stringify({ type: 'Job Link', input, riskScore: score, status })
+                    });
+                    loadStats();
+                    loadScans();
+                } catch (err) { console.error('Save scan error', err); }
+
+                btn.textContent = 'Scan Now';
+                btn.disabled = false;
+            }, 2000);
+        }
+
+        loadStats();
+        loadScans();
+    </script>
+</body>
+
+</html>

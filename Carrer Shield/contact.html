@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Career Shield</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">Career Shield</div>
+                <div class="mobile-menu-btn">
+                    <button class="icon-btn" id="menu-btn">☰</button>
+                </div>
+                <div class="nav-links" id="nav-links">
+                    <a href="index.html">Home</a>
+                    <a href="about.html">About Us</a>
+                    <a href="services.html">Services</a>
+                    <a href="contact.html" class="active">Contact</a>
+                    <a href="user-dashboard.html">Dashboard</a>
+                    <a href="login.html" class="btn">Login</a>
+                </div>
+                <div class="controls">
+                    <button class="icon-btn" id="rtl-toggle" title="Toggle RTL">RTL</button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container" style="padding: 4rem 0;">
+        <div class="grid" style="grid-template-columns: 1fr 1fr; gap: 4rem;">
+            <div>
+                <h1 style="color: var(--primary-color); margin-bottom: 1.5rem;">Get in Touch</h1>
+                <p style="margin-bottom: 2rem;">Have a question or want to report a new scam pattern? We are here to
+                    listen.</p>
+                <div style="margin-bottom: 1rem;">
+                    <strong>Email:</strong> support@careershield.com
+                </div>
+                <div style="margin-bottom: 1rem;">
+                    <strong>Phone:</strong> +1 (555) 123-4567
+                </div>
+                <div>
+                    <strong>Address:</strong> 123 Cyber Way, Tech City, TC 90210
+                </div>
+            </div>
+            <div class="card">
+                <div id="contact-alert"></div>
+                <form id="contact-form" onsubmit="submitContact(event)">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" placeholder="Your Name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" placeholder="Your Email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" rows="5" placeholder="How can we help?" required></textarea>
+                    </div>
+                    <button type="submit" class="btn" id="contact-btn" style="width: 100%;">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Career Shield. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="main.js"></script>
+    <script src="rtltoggle.js"></script>
+    <script>
+        async function submitContact(e) {
+            e.preventDefault();
+            const btn = document.getElementById('contact-btn');
+            btn.textContent = 'Sending...';
+            btn.disabled = true;
+
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+
+            try {
+                const res = await fetch('/api/contact', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name, email, message })
+                });
+                const data = await res.json();
+                if (!res.ok) throw new Error(data.message);
+                document.getElementById('contact-alert').innerHTML = `<div style="padding:10px;background:#e5f9f6;color:#00897b;border-radius:6px;margin-bottom:1rem;">✅ ${data.message}</div>`;
+                document.getElementById('contact-form').reset();
+            } catch (err) {
+                document.getElementById('contact-alert').innerHTML = `<div style="padding:10px;background:#ffe5e9;color:#c0392b;border-radius:6px;margin-bottom:1rem;">❌ ${err.message}</div>`;
+            } finally {
+                btn.textContent = 'Send Message';
+                btn.disabled = false;
+            }
+        }
+    </script>
+</body>
+
+</html>
